@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BahanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Formulir Umum Registrasi Permohonan Pengujian
+Route::get('/registrasi/permohonan-pengujian', [HomeController::class, 'registasi_pengujian'])->name('registrasi.pengujian');
+// Kirim Formulir Umum Registrasi Permohonan Pengujian
+Route::post('registrasi/permohonan-pengujian/store', [HomeController::class, 'registasi_pengujian_store'])->name('registrasi.pengujian.store');
+// Ticket Permohonan
+Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, 'ticket_permohonan_pengujian'])->name('ticket.permohonan.pengujian');
 
 
 Route::middleware(['auth'])->prefix('auth')->group(function () {
