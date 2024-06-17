@@ -22,6 +22,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->segment(2) == 'bahan' ? 'active' : '' }}">
+                    <a href="{{ route('bahan.index') }}">
+                        <i class="fas fa-box"></i>
+                        <p>Bahan</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

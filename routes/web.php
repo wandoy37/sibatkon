@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BahanController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->prefix('auth')->group(function () {
     // Dashboard View
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    // Route Bahan Controller
+    Route::resource('bahan', BahanController::class);
 });
