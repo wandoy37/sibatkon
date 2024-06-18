@@ -42,8 +42,8 @@
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                                     <a class="dropdown-item"
                                                         href="{{ route('material.create', $checklist->formulir->code_form) }}">
-                                                        <i class="fas fa-plus"></i>
-                                                        Material
+                                                        <i class="fas fa-check-circle"></i>
+                                                        Ceklst Material
                                                     </a>
                                                     <a class="dropdown-item" href="/">
                                                         <i class="fas fa-print"></i>

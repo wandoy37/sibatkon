@@ -54,13 +54,16 @@
 
         {{-- Tabel List Materials --}}
         <div class="col-lg-12">
-            <div class="my-4">
-                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_create">
-                    <i class="fas fa-plus"></i>
-                    Material
-                </button>
-            </div>
-            @include('dashboard.material.modal_create')
+            @if ($formulir->status == 'pengajuan')
+                <div class="my-4">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+                        data-target="#modal_create">
+                        <i class="fas fa-plus"></i>
+                        Material
+                    </button>
+                </div>
+                @include('dashboard.material.modal_create')
+            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -74,7 +77,9 @@
                                 <th>Satuan</th>
                                 <th>Kelengkapan</th>
                                 <th>Keterangan</th>
-                                <th>Aksi</th>
+                                @if ($formulir->status == 'pengajuan')
+                                    <th>Aksi</th>
+                                @endif
                             </thead>
                             <tbody>
                                 @php
@@ -89,17 +94,20 @@
                                         <td>{{ $item->satuan }}</td>
                                         <td>{{ $item->kelengkapan }}</td>
                                         <td>{{ $item->keterangan }}</td>
-                                        <td>
-                                            <form action="{{ route('delete.material', $item->id) }}" method="POST"
-                                                class="form-inline justify-content-center">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger"
-                                                    onclick="return confirm('Anda yakin ingin menghapus material ini ?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
+                                        @if ($formulir->status == 'pengajuan')
+                                            <td>
+                                                <form action="{{ route('delete.material', $item->id) }}" method="POST"
+                                                    class="form-inline justify-content-center">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                        onclick="return confirm('Anda yakin ingin menghapus material ini ?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        @endif
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -108,6 +116,19 @@
                 </div>
             </div>
         </div>
+        @if ($formulir->status == 'pengajuan')
+            <div class="col-lg-12 d-flex justify-content-end">
+                <form action="{{ route('permohonan.update.status', $formulir->code_form) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-outline-info btn-round"
+                        onclick="return confirm('Anda yakin ingin melakukan verifikasi ceklist pengujian ?')">
+                        <i class="fas fa-info"></i>
+                        Verifikasi Ceklist Material
+                    </button>
+                </form>
+            </div>
+        @endif
     </div>
 @endsection
 

@@ -74,6 +74,12 @@
                                                             <i class="fas fa-plus"></i>
                                                             Buat Check List
                                                         </a>
+                                                    @else
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('material.create', $permohonan->code_form) }}">
+                                                            <i class="fas fa-check-circle"></i>
+                                                            Ceklst Material
+                                                        </a>
                                                     @endif
                                                     <a class="dropdown-item"
                                                         href="{{ route('checklist.create', $permohonan->code_form) }}">

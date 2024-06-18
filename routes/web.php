@@ -40,6 +40,9 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 
     // List / Daftar Permohonan Yang Masuk
     Route::get('/permohonan-pengujian', [PermohonanController::class, 'permohonan_pengujian_index'])->name('permohonan.pengujian.index');
+    // Update Status Permohonan
+    Route::patch('permohonan-pengujian/update/status/{code_form}', [PermohonanController::class, 'permohonan_update_status'])->name('permohonan.update.status');
+
     // Buat Checklist
     Route::get('/checklist', [ChecklistController::class, 'index'])->name('checklist.index');
     Route::get('/checklist/create/{code_form}', [ChecklistController::class, 'create'])->name('checklist.create');
