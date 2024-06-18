@@ -61,3 +61,9 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $('#basic-datatables').DataTable();
+    </script>
+@endpush
