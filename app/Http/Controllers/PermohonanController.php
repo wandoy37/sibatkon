@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Formulir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PermohonanController extends Controller
 {
     public function permohonan_pengujian_index()
     {
-        $permohonans = Formulir::orderBy('id', 'DESC')->get();
+
+        if (Auth::user()->role == 'penguji') {
+            $permohonans = Formulir::whereIn('status', ['ceklist', 'pengujian'])
+                ->orderBy('id', 'DESC')
+                ->get();
+        } else {
+            $permohonans = Formulir::orderBy('id', 'DESC')->get();
+        }
         return view('dashboard.permohonan_pengujian.index', compact('permohonans'));
     }
 

@@ -22,24 +22,40 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->segment(2) == 'bahan' ? 'active' : '' }}">
-                    <a href="{{ route('bahan.index') }}">
-                        <i class="fas fa-box"></i>
-                        <p>Bahan</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ request()->segment(2) == 'permohonan-pengujian' ? 'active' : '' }}">
-                    <a href="{{ route('permohonan.pengujian.index') }}">
-                        <i class="far fa-envelope-open"></i>
-                        <p>Permohonan Pengujian</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ request()->segment(2) == 'checklist' ? 'active' : '' }}">
-                    <a href="{{ route('checklist.index') }}">
-                        <i class="fas fa-clipboard-check"></i>
-                        <p>Check List Material</p>
-                    </a>
-                </li>
+                @if (Auth::user()->role !== 'penguji')
+                    <li class="nav-item {{ request()->segment(2) == 'bahan' ? 'active' : '' }}">
+                        <a href="{{ route('bahan.index') }}">
+                            <i class="fas fa-box"></i>
+                            <p>Bahan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ request()->segment(2) == 'permohonan-pengujian' ? 'active' : '' }}">
+                        <a href="{{ route('permohonan.pengujian.index') }}">
+                            <i class="far fa-envelope-open"></i>
+                            <p>Permohonan Pengujian</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ request()->segment(2) == 'checklist' ? 'active' : '' }}">
+                        <a href="{{ route('checklist.index') }}">
+                            <i class="fas fa-clipboard-check"></i>
+                            <p>Check List Material</p>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->role == 'penguji')
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">KOTAK MASUK</h4>
+                    </li>
+                    <li class="nav-item {{ request()->segment(2) == 'kotak-masuk' ? 'active' : '' }}">
+                        <a href="{{ route('kotak.masuk.index') }}">
+                            <i class="icon-check"></i>
+                            <p>Verifikasi Permohonan</p>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

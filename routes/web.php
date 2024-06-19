@@ -4,6 +4,7 @@ use App\Http\Controllers\BahanController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('template_surat.permohonan_pengujian');
+    return view('welcome');
 });
 
 // Formulir Umum Registrasi Permohonan Pengujian
@@ -54,4 +54,8 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
     Route::post('/checklist/tambah-material/store', [ChecklistController::class, 'store_material'])->name('store.material');
     // Delete Material
     Route::delete('/checklist/tambah-material/delete/{id}', [ChecklistController::class, 'delete_material'])->name('delete.material');
+
+    // Kotak Masuk
+    Route::get('/kotak-masuk/verifikasi', [KotakMasukController::class, 'index'])->name('kotak.masuk.index');
+    Route::get('/kotak-masuk/verifikasi/show/{code_form}', [KotakMasukController::class, 'show'])->name('kotak.masuk.show');
 });
