@@ -40,6 +40,12 @@
                                         <td>{{ $permohonan->nama_pemohon }}</td>
                                         <td>{{ $permohonan->bahan->nama }}</td>
                                         <td>{{ $permohonan->kontraktor_nama }}</td>
+                                        <td>
+                                            <a href="{{ asset('storage/' . $permohonan->dokumen) }}" target="_blank"
+                                                class="text-decoration-none">
+                                                Lampiran
+                                            </a>
+                                        </td>
                                         <td class="text-uppercase">
                                             @if ($permohonan->status == 'pengajuan')
                                                 <span class="badge badge-info"
@@ -55,20 +61,18 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ asset('storage/' . $permohonan->dokumen) }}" target="_blank"
-                                                class="text-decoration-none">
-                                                <i class="far fa-eye"></i>
-                                                Lihat
-                                            </a>
-                                        </td>
-                                        <td>
                                             <div class="btn-group dropdown">
                                                 <button class="btn btn-primary dropdown-toggle" type="button"
                                                     id="dropdownMenu1" data-toggle="dropdown">
                                                     Aksi
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                                    @if ($permohonan->checklist == null)
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('checklist.create', $permohonan->code_form) }}">
+                                                        <i class="fas fa-print"></i>
+                                                        Cetak Permohonan Pengujian
+                                                    </a>
+                                                    @if ($permohonan->checklist->isEmpty())
                                                         <a class="dropdown-item"
                                                             href="{{ route('checklist.create', $permohonan->code_form) }}">
                                                             <i class="fas fa-plus"></i>
@@ -77,15 +81,16 @@
                                                     @else
                                                         <a class="dropdown-item"
                                                             href="{{ route('material.create', $permohonan->code_form) }}">
-                                                            <i class="fas fa-check-circle"></i>
-                                                            Ceklst Material
+                                                            <i class="fas fa-eye"></i>
+                                                            Lihat Checklist
                                                         </a>
                                                     @endif
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('checklist.create', $permohonan->code_form) }}">
-                                                        <i class="fas fa-print"></i>
-                                                        Cetak Permohonan Pengujian
-                                                    </a>
+                                                    @if ($permohonan->status == 'pengujian')
+                                                        <a class="dropdown-item" href="/">
+                                                            <i class="fas fa-eye"></i>
+                                                            Surat Perintah Uji
+                                                        </a>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>

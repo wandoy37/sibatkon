@@ -40,14 +40,49 @@
                                             <a href="{{ asset('storage/' . $permohonan->dokumen) }}" target="_blank"
                                                 class="text-decoration-none">
                                                 <i class="fas fa-file-alt"></i>
-                                                Surat Permohonan
+                                                Lampiran
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('kotak.masuk.show', $permohonan->code_form) }}"
+                                            <div class="btn-group dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenu1" data-toggle="dropdown">
+                                                    Aksi
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                                    <a class="dropdown-item" href="/">
+                                                        <i class="fas fa-eye"></i>
+                                                        Lihat Permohonan Pengujian {{-- Menampilkan PDF Permohonan Pengujian --}}
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('material.create', $permohonan->code_form) }}">
+                                                        <i class="fas fa-eye"></i>
+                                                        Lihat Checklist
+                                                    </a>
+                                                    @if ($permohonan->status == 'ceklist')
+                                                        <form
+                                                            action="{{ route('update.setujui.permohonan', $permohonan->code_form) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" class="btn btn-link"
+                                                                onclick="return confirm('Anda yakin ingin melakukan persetujuan pengujian ?')">
+                                                                Setujui Permohonan
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                    @if ($permohonan->status == 'pengujian')
+                                                        <a class="dropdown-item" href="/">
+                                                            <i class="fas fa-eye"></i>
+                                                            Surat Perintah Uji
+                                                        </a>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                            {{-- <a href="{{ route('kotak.masuk.show', $permohonan->code_form) }}"
                                                 class="btn btn-outline-primary">
                                                 <i class="far fa-eye"></i>
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach

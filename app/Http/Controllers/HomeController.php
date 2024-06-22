@@ -48,53 +48,54 @@ class HomeController extends Controller
                 ->withInput();
         }
 
+        // Upload Dokumen
+        if ($request->file('dokumen')) {
+            $file = $request->file('dokumen');
+
+            // Menangkap nama asli file
+            $originalName = $file->getClientOriginalName();
+
+            // Membuat nama file unik
+            $uniqueName = time() . '_' . $originalName;
+
+            // Simpan file dengan nama unik
+            $filePath = $file->storeAs('uploads', $uniqueName, 'public');
+        }
+
+        // Simpan Data Ke Database
+        $dataInput = [
+            'code_form' => $request->code_form,
+            // Identitas Pemohon
+            'nama_pemohon' => $request->nama_pemohon,
+            'alamat_pemohon' => $request->alamat_pemohon,
+            'no_hp_pemohon' => $request->no_hp_pemohon,
+            'email_pemohon' => $request->email_pemohon,
+
+            // Bahan Konstruksi
+            'bahan_id' => $request->bahan_id,
+            'quantity' => $request->quantity,
+            'keterangan_lain' => $request->keterangan_lain,
+            'uraian_pengujian' => $request->uraian_pengujian,
+            'keperluan_pengujian' => $request->keperluan_pengujian,
+
+            // Pelaksana / Kontraktor
+            'kontraktor_nama' => $request->kontraktor_nama,
+            'kontraktor_alamat' => $request->kontraktor_alamat,
+
+            // Dokumen Permohonan
+            'dokumen' => $filePath,
+            // Sisa Contoh,
+            'sisa_contoh' => $request->sisa_contoh,
+            // Status Permohonan
+            'status' => 'pengajuan',
+        ];
+
+        Formulir::create($dataInput);
+
+        return redirect()->route('ticket.permohonan.pengujian', $request->code_form)->with('success', 'Permohonan Berhasil Dibuat');
+
         DB::beginTransaction();
         try {
-            // Upload Dokumen
-            if ($request->file('dokumen')) {
-                $file = $request->file('dokumen');
-
-                // Menangkap nama asli file
-                $originalName = $file->getClientOriginalName();
-
-                // Membuat nama file unik
-                $uniqueName = time() . '_' . $originalName;
-
-                // Simpan file dengan nama unik
-                $filePath = $file->storeAs('uploads', $uniqueName, 'public');
-            }
-
-            // Simpan Data Ke Database
-            $dataInput = [
-                'code_form' => $request->code_form,
-                // Identitas Pemohon
-                'nama_pemohon' => $request->nama_pemohon,
-                'alamat_pemohon' => $request->alamat_pemohon,
-                'no_hp_pemohon' => $request->no_hp_pemohon,
-                'email_pemohon' => $request->email_pemohon,
-
-                // Bahan Konstruksi
-                'bahan_id' => $request->bahan_id,
-                'quantity' => $request->quantity,
-                'keterangan_lain' => $request->keterangan_lain,
-                'uraian_pengujian' => $request->uraian_pengujian,
-                'keperluan_pengujian' => $request->keperluan_pengujian,
-
-                // Pelaksana / Kontraktor
-                'kontraktor_nama' => $request->kontraktor_nama,
-                'kontraktor_alamat' => $request->kontraktor_alamat,
-
-                // Dokumen Permohonan
-                'dokumen' => $filePath,
-                // Sisa Contoh,
-                'sisa_contoh' => $request->sisa_contoh,
-                // Status Permohonan
-                'status' => 'pengajuan',
-            ];
-
-            Formulir::create($dataInput);
-
-            return redirect()->route('ticket.permohonan.pengujian', $request->code_form)->with('success', 'Permohonan Berhasil Dibuat');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Permohonan Gagal Dibuat');

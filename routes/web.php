@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\TemplateSuratController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,9 @@ Route::get('/registrasi/permohonan-pengujian', [HomeController::class, 'registas
 Route::post('registrasi/permohonan-pengujian/store', [HomeController::class, 'registasi_pengujian_store'])->name('registrasi.pengujian.store');
 // Ticket Permohonan
 Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, 'ticket_permohonan_pengujian'])->name('ticket.permohonan.pengujian');
+
+
+// Template Surat Controller
 
 
 Route::middleware(['auth'])->prefix('auth')->group(function () {
@@ -58,4 +62,7 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
     // Kotak Masuk
     Route::get('/kotak-masuk/verifikasi', [KotakMasukController::class, 'index'])->name('kotak.masuk.index');
     Route::get('/kotak-masuk/verifikasi/show/{code_form}', [KotakMasukController::class, 'show'])->name('kotak.masuk.show');
+
+    // Update Disetujui Pengujian
+    Route::patch('/update/setujui/{code_form}', [PermohonanController::class, 'update_setujui_permohonan'])->name('update.setujui.permohonan');
 });

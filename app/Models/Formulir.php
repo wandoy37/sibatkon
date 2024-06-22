@@ -14,13 +14,13 @@ class Formulir extends Model
     protected $table = 'formulirs';
     protected $guarded = [];
 
-    public function bahan(): BelongsTo
+    public function bahan()
     {
         return $this->belongsTo(Bahan::class);
     }
 
     public function checklist(): HasMany
     {
-        return $this->hasMany(Checklist::class);
+        return $this->hasMany(Checklist::class, 'formulir_id');
     }
 }

@@ -44,4 +44,21 @@ class PermohonanController extends Controller
             DB::commit();
         }
     }
+
+    public function update_setujui_permohonan($code_form)
+    {
+        DB::beginTransaction();
+        try {
+            $formulir = Formulir::where('code_form', $code_form)->first();
+            $formulir->update([
+                'status' => 'pengujian',
+            ]);
+            return redirect()->back()->with('success', 'Permohonan Berhasil Di Setujui ');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Permohonan Berhasil Di Setujui');
+        } finally {
+            DB::commit();
+        }
+    }
 }

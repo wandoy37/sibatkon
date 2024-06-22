@@ -34,23 +34,10 @@
                                         <td>{{ $checklist->formulir->kontraktor_nama }}</td>
                                         <td>{{ $checklist->tahun_anggaran }}</td>
                                         <td>
-                                            <div class="btn-group dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenu1" data-toggle="dropdown">
-                                                    Aksi
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('material.create', $checklist->formulir->code_form) }}">
-                                                        <i class="fas fa-check-circle"></i>
-                                                        Ceklst Material
-                                                    </a>
-                                                    <a class="dropdown-item" href="/">
-                                                        <i class="fas fa-print"></i>
-                                                        Cetak Check List
-                                                    </a>
-                                                </ul>
-                                            </div>
+                                            <a class="btn btn-primary btn-round"
+                                                href="{{ route('material.create', $checklist->formulir->code_form) }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -45,6 +45,17 @@
                             <span class="font-weight-bold">{{ $permohonan->keperluan_pengujian }}</span>
                         </div>
                     </div>
+
+                    <div class="row my-4">
+                        <div class="col-md-12">
+                            <hr class="my-4">
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ route('surat.permohonan_pengujian', $permohonan->code_form) }}">
+                                Surat Permohonan Pengujian
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
