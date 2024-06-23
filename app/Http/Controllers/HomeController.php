@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    public function index()
+    {
+        $bahans = Bahan::all();
+        return view('home.index', compact('bahans'));
+    }
+
     public function registasi_pengujian()
     {
         $bahans = Bahan::all();
@@ -45,7 +51,8 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
-                ->withInput();
+                ->withInput()
+                ->with('scroll_to_section', 'section_permohonan_pengujian');
         }
 
         // Upload Dokumen
