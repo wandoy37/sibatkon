@@ -19,14 +19,14 @@
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" cellspacing="0"
                             width="100%">
-                            <thead>
+                            <thead class="text-center">
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Nama Pemohon</th>
                                 <th>Jenis Bahan</th>
                                 <th>Pelaksana / Kontraktor</th>
                                 <th>Lampiran</th>
-                                <th>Status</th>
+                                <th>Status Permohonan</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
@@ -34,7 +34,7 @@
                                     $no = 1;
                                 @endphp
                                 @foreach ($permohonans as $permohonan)
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $permohonan->created_at->format('Y-m-d') }}</td>
                                         <td>{{ $permohonan->nama_pemohon }}</td>
@@ -48,16 +48,19 @@
                                         </td>
                                         <td class="text-uppercase">
                                             @if ($permohonan->status == 'pengajuan')
-                                                <span class="badge badge-info"
-                                                    style="font-size: 16px;">{{ $permohonan->status }}</span>
+                                                <span class="badge badge-info" style="font-size: 16px;">
+                                                    Perlu Diverifikasi
+                                                </span>
                                             @endif
                                             @if ($permohonan->status == 'ceklist')
-                                                <span class="badge badge-primary"
-                                                    style="font-size: 16px;">{{ $permohonan->status }}</span>
+                                                <span class="badge badge-primary" style="font-size: 16px;">
+                                                    Belum Disetujui
+                                                </span>
                                             @endif
                                             @if ($permohonan->status == 'pengujian')
-                                                <span class="badge badge-success"
-                                                    style="font-size: 16px;">{{ $permohonan->status }}</span>
+                                                <span class="badge badge-success" style="font-size: 16px;">
+                                                    Setuju
+                                                </span>
                                             @endif
                                         </td>
                                         <td>
@@ -68,7 +71,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                                     <a class="dropdown-item"
-                                                        href="{{ route('checklist.create', $permohonan->code_form) }}">
+                                                        href="{{ route('generate.permohonan.pengujian', $permohonan->code_form) }}">
                                                         <i class="fas fa-print"></i>
                                                         Cetak Permohonan Pengujian
                                                     </a>
@@ -85,12 +88,12 @@
                                                             Lihat Checklist
                                                         </a>
                                                     @endif
-                                                    @if ($permohonan->status == 'pengujian')
+                                                    {{-- @if ($permohonan->status == 'pengujian')
                                                         <a class="dropdown-item" href="/">
                                                             <i class="fas fa-eye"></i>
                                                             Surat Perintah Uji
                                                         </a>
-                                                    @endif
+                                                    @endif --}}
                                                 </ul>
                                             </div>
                                         </td>

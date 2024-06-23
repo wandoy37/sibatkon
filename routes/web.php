@@ -3,6 +3,7 @@
 use App\Http\Controllers\BahanController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GeneratePdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
@@ -32,7 +33,9 @@ Route::post('registrasi/permohonan-pengujian/store', [HomeController::class, 're
 Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, 'ticket_permohonan_pengujian'])->name('ticket.permohonan.pengujian');
 
 
-// Template Surat Controller
+// Cetak Output Permohonan Pengujian
+Route::get('/cetak/permohonan-pengujian/{code_form}', [GeneratePdfController::class, 'generatePermohonanPengujian'])->name('generate.permohonan.pengujian');
+
 
 
 Route::middleware(['auth'])->prefix('auth')->group(function () {
