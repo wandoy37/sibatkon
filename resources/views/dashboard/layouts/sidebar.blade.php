@@ -41,6 +41,12 @@
                             <p>Check List Material</p>
                         </a>
                     </li>
+                    <li class="nav-item {{ request()->segment(2) == 'survey' ? 'active' : '' }}">
+                        <a href="{{ route('survey.index') }}">
+                            <i class="icon-check"></i>
+                            <p>Survey</p>
+                        </a>
+                    </li>
                 @endif
                 @if (Auth::user()->role == 'penguji')
                     <li class="nav-section">

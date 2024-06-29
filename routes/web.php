@@ -7,6 +7,7 @@ use App\Http\Controllers\GeneratePdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TemplateSuratController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,11 @@ Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, '
 
 // Cetak Output Permohonan Pengujian
 Route::get('/cetak/permohonan-pengujian/{code_form}', [GeneratePdfController::class, 'generatePermohonanPengujian'])->name('generate.permohonan.pengujian');
+
+// Survey Store
+Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
+// Survey Success
+Route::get('/survey/success', [SurveyController::class, 'success'])->name('survey.success');
 
 
 
@@ -70,4 +76,7 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 
     // Update Disetujui Pengujian
     Route::patch('/update/setujui/{code_form}', [PermohonanController::class, 'update_setujui_permohonan'])->name('update.setujui.permohonan');
+
+    // Survey Index
+    Route::get('/survey', [DashboardController::class, 'survey_index'])->name('survey.index');
 });
