@@ -47,6 +47,12 @@
                             <p>Survey</p>
                         </a>
                     </li>
+                    <li class="nav-item {{ request()->segment(2) == 'profil' ? 'active' : '' }}">
+                        <a href="{{ route('profil.edit') }}">
+                            <i class="icon-information"></i>
+                            <p>Update Profil</p>
+                        </a>
+                    </li>
                 @endif
                 @if (Auth::user()->role == 'penguji')
                     <li class="nav-section">

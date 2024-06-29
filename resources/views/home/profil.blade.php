@@ -20,7 +20,7 @@
                 <div class="row position-relative">
 
                     <div class="col-lg-6 about-img"
-                        style="background-image: url({{ asset('landing_page') }}/assets/img/about.jpg);"></div>
+                        style="background-image: url({{ asset('img/' . $profil->foto_sejarah) }});"></div>
 
                     <div class="col-lg-8">
                         <h4>UPTD <span>.</span></h4>
@@ -29,11 +29,9 @@
                             {{-- <h4>Est 1988</h4> --}}
                             <h3>SEJARAH</h3>
                             <p>
-                                Dibentuk berdasarkan Peraturan Gubernur Kalimantan Timur Nomor 23 Tahun 2019 tentang
-                                Pembentukan dan Susunan Organisasi Unit Pelaksana Teknis Daerah pada Dinas Pekerjaan Umum,
-                                Penataan Ruang, dan Perumahan Rakyat Provinsi Kalimantan Timur.
+                                {{ $profil->sejarah }}
                             </p>
-                            <ul>
+                            {{-- <ul>
                                 <h4>STRATEGI</h4>
                                 <li>
                                     <i class="bi bi-check-circle"></i>
@@ -57,7 +55,7 @@
                                 <i class="bi bi-play-circle"></i>
                                 <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox stretched-link">Watch
                                     Video</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -79,7 +77,7 @@
                             <div>
                                 <h3><a href="" class="stretched-link">Visi</a></h3>
                                 <h5>
-                                    Terwujudnya Hasil Pengujian yang berkesinambungan dengan Standarisasi yang berlaku.
+                                    {{ $profil->visi }}
                                 </h5>
                             </div>
                         </div><!-- End Icon Box -->
@@ -92,7 +90,7 @@
                             <div>
                                 <h3><a href="" class="stretched-link">Misi</a></h3>
                                 <h5>
-                                    Melaksanakan Pengujian bahan dibidang konstruksi sesuai standarisasi yang berlaku.
+                                    {{ $profil->misi }}
                                 </h5>
                             </div>
                         </div><!-- End Icon Box -->
@@ -114,7 +112,7 @@
 
                 <div class="row gy-5">
                     <div class="col-lg-12">
-                        <img src="{{ asset('img/struktur_organisasi.png') }}" class="img-fluid img-thumbnail"
+                        <img src="{{ asset('img/' . $profil->struktur_organisasi) }}" class="img-fluid img-thumbnail"
                             alt="">
                     </div>
                 </div>

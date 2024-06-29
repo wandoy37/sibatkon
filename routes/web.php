@@ -7,6 +7,7 @@ use App\Http\Controllers\GeneratePdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TemplateSuratController;
 use Illuminate\Support\Facades\Route;
@@ -82,4 +83,8 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 
     // Survey Index
     Route::get('/survey', [DashboardController::class, 'survey_index'])->name('survey.index');
+
+    // Profil Edit
+    Route::get('profil', [ProfilController::class, 'edit'])->name('profil.edit');
+    Route::patch('profil/update/{id}', [ProfilController::class, 'update'])->name('profil.update');
 });

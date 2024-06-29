@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bahan;
 use App\Models\Formulir;
+use App\Models\Profil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,8 @@ class HomeController extends Controller
 
     public function profil()
     {
-        return view('home.profil');
+        $profil = Profil::find(1);
+        return view('home.profil', compact('profil'));
     }
 
     public function registasi_pengujian()
