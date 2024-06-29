@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SIBATKON - Sistem Informasi Pengujian Bahan Konstruksi</title>
-    <meta content="Sistem Informasi Pengujian Bahan Konstruksi" name="description">
-    <meta content="Sistem Informasi Pengujian Bahan Konstruksi" name="keywords">
+    <title>TERBAGI - Terwujudnya Pelayanan Prima Berbasis Digital</title>
+    <meta content="Terwujudnya Pelayanan Prima Berbasis Digital" name="description">
+    <meta content="Terwujudnya Pelayanan Prima Berbasis Digital" name="keywords">
 
     <!-- Favicons -->
     <link href="{{ asset('img/logo_kaltim.png') }}" rel="icon">
@@ -65,8 +65,8 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Coat_of_arms_of_East_Kalimantan.svg/490px-Coat_of_arms_of_East_Kalimantan.svg.png"
                     style="max-width: 60px; max-height: 60px;" class="img-fluid" alt="">
                 <div class="logo-text">
-                    <h1>SIBATKON</h1>
-                    <small class="text-white">Sistem Informasi Pengujian Bahan Konstruksi</small>
+                    <h1>TERBAGI</h1>
+                    <small class="text-white">Terwujudnya Pelayanan Prima Berbasis Digital</small>
                 </div>
             </a>
 
@@ -88,7 +88,7 @@
 
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-info">
-                            <h3>SIBATKON</h3>
+                            <h3>TERBAGI</h3>
                             <p>
                                 Jl. Teuku Umar No. 1 <br>
                                 75126, Samarinda<br><br>
@@ -126,7 +126,7 @@
                 <div class="copyright">
                     &copy; Copyright {{ date('Y') }}<strong>
                         <br>
-                        <span>SIBATKON</span></strong>. All Rights Reserved
+                        <span>TERBAGI</span></strong>. All Rights Reserved
                 </div>
             </div>
         </div>

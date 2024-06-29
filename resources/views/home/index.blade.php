@@ -8,9 +8,9 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h2 data-aos="fade-down">SIBATKON</h2>
+                        <h2 data-aos="fade-down">TERBAGI</h2>
                         <p data-aos="fade-up">
-                            Sistem Informasi Pengujian Bahan Konstruksi mewakili inovasi kunci dalam industri konstruksi
+                            Terwujudnya Pelayanan Prima Berbasis Digital kunci dalam industri konstruksi
                             modern dengan digitalisasi proses permohonan pengujian
                         </p>
                         <a data-aos="fade-up" data-aos-delay="200" href="#section_permohonan_pengujian"
