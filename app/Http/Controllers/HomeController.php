@@ -16,6 +16,11 @@ class HomeController extends Controller
         return view('home.index', compact('bahans'));
     }
 
+    public function profil()
+    {
+        return view('home.profil');
+    }
+
     public function registasi_pengujian()
     {
         $bahans = Bahan::all();

@@ -112,6 +112,7 @@
                         <h4>Navigasi Links</h4>
                         <ul>
                             <li><a href="{{ route('home.index') }}">Home</a></li>
+                            <li><a href="{{ route('home.profil') }}">Profil</a></li>
                             <li><a href="#section_permohonan_pengujian">Daftar Permohonan Pengujian</a></li>
                         </ul>
                     </div>

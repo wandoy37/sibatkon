@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/profil', [HomeController::class, 'profil'])->name('home.profil');
+
+
 
 // Formulir Umum Registrasi Permohonan Pengujian
 Route::get('/registrasi/permohonan-pengujian', [HomeController::class, 'registasi_pengujian'])->name('registrasi.pengujian');
