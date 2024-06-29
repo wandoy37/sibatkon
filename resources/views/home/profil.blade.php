@@ -20,7 +20,7 @@
                 <div class="row position-relative">
 
                     <div class="col-lg-6 about-img"
-                        style="background-image: url({{ asset('img/' . $profil->foto_sejarah) }});"></div>
+                        style="background-image: url({{ asset('storage/img/' . $profil->foto_sejarah) }});"></div>
 
                     <div class="col-lg-8">
                         <h4>UPTD <span>.</span></h4>
@@ -112,8 +112,8 @@
 
                 <div class="row gy-5">
                     <div class="col-lg-12">
-                        <img src="{{ asset('img/' . $profil->struktur_organisasi) }}" class="img-fluid img-thumbnail"
-                            alt="">
+                        <img src="{{ asset('storage/img/' . $profil->struktur_organisasi) }}"
+                            class="img-fluid img-thumbnail" alt="">
                     </div>
                 </div>
             </div>

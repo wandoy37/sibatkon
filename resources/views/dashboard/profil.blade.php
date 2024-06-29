@@ -31,7 +31,7 @@
                                     <br>
                                     <!-- Display the old uploaded file if it exists -->
                                     @if ($profil->foto_sejarah)
-                                        <img id="current-image" src="{{ asset('img/' . $profil->foto_sejarah) }}"
+                                        <img id="current-image" src="{{ asset('storage/img/' . $profil->foto_sejarah) }}"
                                             alt="Current Image" style="max-width: 200px; margin-top: 10px;">
                                         <p>Current file: {{ $profil->foto_sejarah }}</p>
                                     @endif
@@ -67,8 +67,8 @@
                                     <!-- Display the old uploaded file if it exists -->
                                     @if ($profil->struktur_organisasi)
                                         <img id="current-struktur-organisasi"
-                                            src="{{ asset('img/' . $profil->struktur_organisasi) }}" alt="Current Image"
-                                            style="max-width: 100%; margin-top: 10px;">
+                                            src="{{ asset('storage/img/' . $profil->struktur_organisasi) }}"
+                                            alt="Current Image" style="max-width: 100%; margin-top: 10px;">
                                         <p>Current file: {{ $profil->struktur_organisasi }}</p>
                                     @endif
                                 </div>
