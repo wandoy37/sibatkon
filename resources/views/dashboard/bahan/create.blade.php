@@ -20,9 +20,25 @@
                     <form action="{{ route('bahan.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>Nama Bahan</label>
+                            <label>Nama Bahan/Sampel</label>
                             <input type="text" class="form-control form-control @error('nama') is-invalid @enderror"
-                                name="nama" placeholder="Default Input">
+                                name="nama" value="{{ old('nama') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="number" class="form-control form-control @error('harga') is-invalid @enderror"
+                                name="harga" value="{{ old('harga') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Volume</label>
+                            <input type="number" class="form-control form-control @error('volume') is-invalid @enderror"
+                                name="volume" value="{{ old('volume') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <input type="text"
+                                class="form-control form-control @error('keterangan') is-invalid @enderror"
+                                name="keterangan" value="{{ old('keterangan') }}">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-round">

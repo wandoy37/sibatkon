@@ -25,7 +25,10 @@
                             width="100%">
                             <thead>
                                 <th>No</th>
-                                <th>Nama Bahan</th>
+                                <th>Nama Bahan/Sampel</th>
+                                <th>Harga</th>
+                                <th>Volume</th>
+                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
@@ -36,6 +39,9 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $bahan->nama }}</td>
+                                        <td>{{ $bahan->harga_rupiah }}</td>
+                                        <td>{{ $bahan->volume }}</td>
+                                        <td>{{ $bahan->keterangan }}</td>
                                         <td>
                                             <form action="{{ route('bahan.destroy', $bahan->id) }}" method="POST"
                                                 class="form-inline justify-content-center">

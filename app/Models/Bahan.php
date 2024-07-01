@@ -16,4 +16,9 @@ class Bahan extends Model
     {
         return $this->hasMany(Formulir::class);
     }
+
+    public function getHargaRupiahAttribute()
+    {
+        return number_format($this->harga, 0, ',', '.');
+    }
 }

@@ -33,6 +33,8 @@ class BahanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'harga' => 'required',
+            'volume' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -45,6 +47,9 @@ class BahanController extends Controller
         try {
             Bahan::create([
                 'nama' => $request->nama,
+                'harga' => $request->harga,
+                'volume' => $request->volume,
+                'keterangan' => $request->keterangan,
             ]);
             return redirect()->route('bahan.index')->with('success', 'Bahan Berhasil Di Tambahkan');
         } catch (\Throwable $th) {
@@ -79,6 +84,8 @@ class BahanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'harga' => 'required',
+            'volume' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -92,6 +99,9 @@ class BahanController extends Controller
             $bahan = Bahan::find($id);
             $bahan->update([
                 'nama' => $request->nama,
+                'harga' => $request->harga,
+                'volume' => $request->volume,
+                'keterangan' => $request->keterangan,
             ]);
             return redirect()->route('bahan.index')->with('success', 'Bahan Berhasil Di Update');
         } catch (\Throwable $th) {
