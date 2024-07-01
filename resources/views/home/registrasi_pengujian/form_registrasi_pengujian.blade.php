@@ -32,12 +32,6 @@
                                                 class="form-control @error('nama_pemohon') is-invalid @enderror"
                                                 value="{{ old('nama_pemohon') }}">
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Alamat Pemohon</label>
-                                            <input type="text" name="alamat_pemohon"
-                                                class="form-control @error('alamat_pemohon') is-invalid @enderror"
-                                                value="{{ old('alamat_pemohon') }}">
-                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -46,11 +40,16 @@
                                                 class="form-control @error('no_hp_pemohon') is-invalid @enderror"
                                                 value="{{ old('no_hp_pemohon') }}">
                                         </div>
+                                    </div>
+                                    <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Email Pemohon</label>
+                                            <label class="form-label">Alamat Pemohon</label>
+                                            <input type="text" name="alamat_pemohon"
+                                                class="form-control @error('alamat_pemohon') is-invalid @enderror"
+                                                value="{{ old('alamat_pemohon') }}">
                                             <input type="text" name="email_pemohon"
                                                 class="form-control @error('email_pemohon') is-invalid @enderror"
-                                                value="{{ old('email_pemohon') }}">
+                                                value="-">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
