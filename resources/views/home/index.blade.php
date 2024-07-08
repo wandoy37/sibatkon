@@ -24,20 +24,11 @@
 
         <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
-            <div class="carousel-item active"
-                style="background-image: url({{ asset('landing_page') }}/assets/img/hero-carousel/hero-carousel-1.jpg)">
+            <div class="carousel-item active" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
             </div>
-            <div class="carousel-item"
-                style="background-image: url({{ asset('landing_page') }}/assets/img/hero-carousel/hero-carousel-2.jpg)">
+            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
             </div>
-            <div class="carousel-item"
-                style="background-image: url({{ asset('landing_page') }}/assets/img/hero-carousel/hero-carousel-3.jpg)">
-            </div>
-            <div class="carousel-item"
-                style="background-image: url({{ asset('landing_page') }}/assets/img/hero-carousel/hero-carousel-4.jpg)">
-            </div>
-            <div class="carousel-item"
-                style="background-image: url({{ asset('landing_page') }}/assets/img/hero-carousel/hero-carousel-5.jpg)">
+            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
             </div>
 
             <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
@@ -108,6 +99,14 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Tanggal Permohonan</label>
+                                                <input type="date" name="created_date"
+                                                    class="form-control @error('created_date') is-invalid @enderror"
+                                                    value="{{ old('created_date') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <hr class="my-4">
                                         </div>
                                     </div>
@@ -125,7 +124,8 @@
                                                     @foreach ($bahans as $bahan)
                                                         <option value="{{ $bahan->id }}"
                                                             {{ old('bahan_id') == $bahan->id ? 'selected' : '' }}>
-                                                            {{ $bahan->nama }}</option>
+                                                            {{ $bahan->nama }} {{ '/ Rp. ' . $bahan->harga_rupiah }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>

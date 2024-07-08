@@ -23,4 +23,13 @@ class Formulir extends Model
     {
         return $this->hasMany(Checklist::class, 'formulir_id');
     }
+
+    // Mengaktifkan timestamps (created_at dan updated_at)
+    public $timestamps = true;
+
+    // Mengizinkan pengisian created_at secara manual
+    public function setCreatedAt($value)
+    {
+        $this->attributes['created_at'] = $value;
+    }
 }

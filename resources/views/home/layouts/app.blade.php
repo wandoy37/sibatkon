@@ -65,8 +65,8 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Coat_of_arms_of_East_Kalimantan.svg/490px-Coat_of_arms_of_East_Kalimantan.svg.png"
                     style="max-width: 60px; max-height: 60px;" class="img-fluid" alt="">
                 <div class="logo-text">
-                    <h1>TERBAGI</h1>
-                    <small class="text-white">Terwujudnya Pelayanan Prima Berbasis Digital</small>
+                    <h1>UPTD. LABORATORIUM BAHAN KONSTRUKSI</h1>
+                    <small class="text-white">Dinas Pekerjaan Umum, Penataan Ruang dan Perumahan Rakyat</small>
                 </div>
             </a>
 

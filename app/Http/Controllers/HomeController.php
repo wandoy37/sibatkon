@@ -8,6 +8,7 @@ use App\Models\Profil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -37,6 +38,7 @@ class HomeController extends Controller
             'alamat_pemohon' => 'required',
             'no_hp_pemohon' => 'required',
             'email_pemohon' => 'required',
+            'created_date' => 'required',
 
             // Bahan Konstruksi
             'bahan_id' => 'required',
@@ -76,6 +78,8 @@ class HomeController extends Controller
             $filePath = $file->storeAs('uploads', $uniqueName, 'public');
         }
 
+        $created_at = Carbon::parse($request->created_date)->setTimeFromTimeString(Carbon::now()->toTimeString());
+
         // Simpan Data Ke Database
         $dataInput = [
             'code_form' => $request->code_form,
@@ -84,6 +88,7 @@ class HomeController extends Controller
             'alamat_pemohon' => $request->alamat_pemohon,
             'no_hp_pemohon' => $request->no_hp_pemohon,
             'email_pemohon' => $request->email_pemohon,
+            'created_at' => $created_at,
 
             // Bahan Konstruksi
             'bahan_id' => $request->bahan_id,

@@ -132,4 +132,68 @@ class PdfService extends Fpdi
 
         exit;
     }
+
+    public function createPerintahUji($formulir, $kasi_pengujian)
+    {
+        $templatePath = public_path('template/surat_perintah_uji.pdf');
+
+        $pdf = new FPDI();
+        $pdf->AddPage('P', 'A4');
+
+        // Halaman pertama =========================================================================================================
+        $pdf->setSourceFile($templatePath);
+        $templateId = $pdf->importPage(1); // Ambil halaman pertama dari template PDF
+        $pdf->useTemplate($templateId);
+
+        // Mengatur margin dalam satuan milimeter (mm)
+        $pdf->SetMargins(20, 20, 20, 30);
+        $pdf->SetAutoPageBreak(true, 20); // Mengatur auto page break dengan margin bawah 20 mm
+
+
+        // Set font dan ukuran
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->SetFont("helvetica", "", 12);
+        $pdf->SetTextColor(0, 0, 0);
+
+        // Kasi Pengujian Nama
+        $pdf->SetXY(0, 28);
+        $pdf->SetX(98);
+        $pdf->Cell(0, 111,  $kasi_pengujian->nama, 0, 'L');
+        $pdf->SetX(12.6);
+
+        // Kasi Pengujian NIP
+        $pdf->SetXY(0, 28);
+        $pdf->SetX(98);
+        $pdf->Cell(0, 130.5,  $kasi_pengujian->nip, 0, 'L');
+        $pdf->SetX(12.6);
+
+        // Kasi Pengujian Jabatan
+        $pdf->SetXY(0, 28);
+        $pdf->SetX(98);
+        $pdf->Cell(0, 149, 'Kasi Pengujian', 0, 'L');
+        $pdf->SetX(12.6);
+
+        // Untuk Melakukan Uji
+        $pdf->SetXY(0, 28);
+        $pdf->SetX(98);
+        $pdf->Cell(0, 168, $formulir->uraian_pengujian, 0, 'L');
+        $pdf->SetX(12.6);
+
+        // Untuk Keperluan
+        $pdf->SetXY(0, 28);
+        $pdf->SetX(98);
+        $pdf->Cell(0, 225, $formulir->keperluan_pengujian, 0, 'L');
+        $pdf->SetX(12.6);
+
+
+        // Halaman pertama End ===================================================================================================
+
+
+        // Set judul file PDF
+        $pdf->SetTitle('Permohonan Pengujian - ' . $formulir->code_form);
+        // Output PDF
+        $pdf->Output('Permohonan Pengujian - ' . $formulir->code_form, 'I');
+
+        exit;
+    }
 }

@@ -84,6 +84,13 @@
                                                             </button>
                                                         </form>
                                                     @endif
+                                                    @if ($permohonan->status == 'pengujian')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('generate.perintah.uji', $permohonan->code_form) }}">
+                                                            <i class="fas fa-eye"></i>
+                                                            Surat Perintah Uji
+                                                        </a>
+                                                    @endif
                                                     {{-- @if ($permohonan->status == 'pengujian')
                                                         <a class="dropdown-item" href="/">
                                                             <i class="fas fa-eye"></i>

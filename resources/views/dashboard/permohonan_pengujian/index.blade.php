@@ -21,10 +21,10 @@
                             width="100%">
                             <thead class="text-center">
                                 <th>No</th>
+                                <th>Ticket</th>
                                 <th>Tanggal</th>
                                 <th>Nama Pemohon</th>
                                 <th>Jenis Bahan</th>
-                                <th>Pelaksana / Kontraktor</th>
                                 <th>Lampiran</th>
                                 <th>Status Permohonan</th>
                                 <th>Aksi</th>
@@ -36,10 +36,10 @@
                                 @foreach ($permohonans as $permohonan)
                                     <tr class="text-center">
                                         <td>{{ $no++ }}</td>
+                                        <td>{{ $permohonan->code_form }}</td>
                                         <td>{{ $permohonan->created_at->format('Y-m-d') }}</td>
                                         <td>{{ $permohonan->nama_pemohon }}</td>
                                         <td>{{ $permohonan->bahan->nama }}</td>
-                                        <td>{{ $permohonan->kontraktor_nama }}</td>
                                         <td>
                                             <a href="{{ asset('storage/' . $permohonan->dokumen) }}" target="_blank"
                                                 class="text-decoration-none">
@@ -88,12 +88,13 @@
                                                             Lihat Checklist
                                                         </a>
                                                     @endif
-                                                    {{-- @if ($permohonan->status == 'pengujian')
-                                                        <a class="dropdown-item" href="/">
+                                                    @if ($permohonan->status == 'pengujian')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('generate.perintah.uji', $permohonan->code_form) }}">
                                                             <i class="fas fa-eye"></i>
                                                             Surat Perintah Uji
                                                         </a>
-                                                    @endif --}}
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>

@@ -42,6 +42,8 @@ Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, '
 
 // Cetak Output Permohonan Pengujian
 Route::get('/cetak/permohonan-pengujian/{code_form}', [GeneratePdfController::class, 'generatePermohonanPengujian'])->name('generate.permohonan.pengujian');
+// Cetak Output Surat Perintah Uji
+Route::get('/cetak/surat-perintah-uji/{code_form}', [GeneratePdfController::class, 'generatePerintahUji'])->name('generate.perintah.uji');
 
 // Survey Store
 Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
