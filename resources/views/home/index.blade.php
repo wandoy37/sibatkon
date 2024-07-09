@@ -24,11 +24,11 @@
 
         <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
-            <div class="carousel-item active" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
+            <div class="carousel-item active" style="background-image: url({{ asset('img/gedung_pupr.png') }})">
             </div>
-            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
+            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.png') }})">
             </div>
-            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.jpeg') }})">
+            <div class="carousel-item" style="background-image: url({{ asset('img/gedung_pupr.png') }})">
             </div>
 
             <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
