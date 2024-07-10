@@ -5,7 +5,7 @@
 
         <!-- ======= Breadcrumbs ======= -->
         <div class="breadcrumbs d-flex align-items-center"
-            style="background-image: url('{{ asset('landing_page') }}/assets/img/breadcrumbs-bg.jpg');">
+            style="background-image: url('{{ asset('img/bg-gedung-pupr.jpeg') }}');">
             <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
                 <h2>Profil</h2>
@@ -19,10 +19,10 @@
 
                 <div class="row position-relative">
 
-                    <div class="col-lg-6 about-img"
+                    <div class="col-lg-7 about-img"
                         style="background-image: url({{ asset('storage/img/' . $profil->foto_sejarah) }});"></div>
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <h4>UPTD <span>.</span></h4>
                         <h2>LABORATORIUM BAHAN KONSTRUKSI</h2>
                         <div class="our-story">

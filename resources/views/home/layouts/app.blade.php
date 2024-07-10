@@ -80,7 +80,8 @@
     @yield('content')
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
+    <footer id="footer" class="footer"
+        style="background: url('{{ asset('img/bg-gedung-pupr.jpeg') }}') no-repeat center center; background-size: cover;">
 
         <div class="footer-content position-relative">
             <div class="container">
