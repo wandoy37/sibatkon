@@ -6,6 +6,7 @@ use App\Models\Formulir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PermohonanController extends Controller
 {
@@ -19,6 +20,7 @@ class PermohonanController extends Controller
         } else {
             $permohonans = Formulir::orderBy('id', 'DESC')->get();
         }
+        Carbon::setLocale('id');
         return view('dashboard.permohonan_pengujian.index', compact('permohonans'));
     }
 

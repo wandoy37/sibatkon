@@ -72,8 +72,9 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 
     // Buat Checklist
     Route::get('/checklist', [ChecklistController::class, 'index'])->name('checklist.index');
-    Route::get('/checklist/create/{code_form}', [ChecklistController::class, 'create'])->name('checklist.create');
+    Route::get('/checklist/create', [ChecklistController::class, 'create'])->name('checklist.create');
     Route::post('/checklist/store', [ChecklistController::class, 'store'])->name('checklist.store');
+    Route::patch('/checklist/delete/{id}', [ChecklistController::class, 'delete'])->name('checklist.delete');
 
     // Tambah Materials
     Route::get('/checklist/tambah-material/{code_form}', [ChecklistController::class, 'create_material'])->name('material.create');

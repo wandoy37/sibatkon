@@ -8,25 +8,27 @@ use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ChecklistController extends Controller
 {
     public function index()
     {
         $checklists = Checklist::orderBy('id', 'DESC')->get();
+        Carbon::setLocale('id');
         return view('dashboard.checklist.index', compact('checklists'));
     }
-    public function create($code_form)
+    public function create()
     {
-        $permohonan = Formulir::where('code_form', $code_form)->first();
-        return view('dashboard.checklist.create', compact('permohonan'));
+        $formulirs = Formulir::where('status', 'pengajuan')->get();
+        return view('dashboard.checklist.create', compact('formulirs'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'diterima_tanggal' => 'required',
             'formulir_id' => 'required',
+            'diterima_tanggal' => 'required',
             'job_mix' => 'required',
             'no_spu' => 'required',
             'tahun_anggaran' => 'required',
@@ -42,17 +44,41 @@ class ChecklistController extends Controller
         DB::beginTransaction();
         try {
             Checklist::create([
-                'diterima_tanggal' => $request->diterima_tanggal,
                 'formulir_id' => $request->formulir_id,
+                'diterima_tanggal' => $request->diterima_tanggal,
                 'job_mix' => $request->job_mix,
                 'no_spu' => $request->no_spu,
                 'tahun_anggaran' => $request->tahun_anggaran,
-                'penerima_id' => $request->penerima_id,
+                'penerima_id' => $request->penerima_id
             ]);
-            return redirect()->route('checklist.index')->with('success', 'Checklist Berhasil Di Tambahkan');
+
+            $formulir = Formulir::find($request->formulir_id);
+            $formulir->update([
+                'status' => 'ceklist'
+            ]);
+            return redirect()->route('checklist.index')->with('success', 'Ceklist Material Berhasil Di Buat');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Checklist Gagal Di Tambahkan');
+            return redirect()->back()->with('error', 'Checklist Gagal Di Buat');
+        } finally {
+            DB::commit();
+        }
+    }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $checklist = Checklist::find($id);
+            $formulir = Formulir::find($checklist->formulir_id);
+            $formulir->update([
+                'status' => 'pengajuan'
+            ]);
+            $checklist->delete();
+            return redirect()->route('checklist.index')->with('success', 'Ceklist Berhasil Di Hapus');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Ceklist Gagal Di Hapus');
         } finally {
             DB::commit();
         }

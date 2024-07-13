@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <a href="{{ route('permohonan.pengujian.index') }}" class="btn btn-outline-info btn-round mb-4">
+            <a href="{{ route('checklist.index') }}" class="btn btn-outline-info btn-round mb-4">
                 <i class="fas fa-chevron-circle-left"></i>
                 Kembali
             </a>
@@ -17,19 +17,31 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Form Check List Material Pengujian</h3>
+                    <h3>Buat Ceklist</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('checklist.store') }}" method="POST">
                         @csrf
+                        <div class="form-group">
+                            <label>Pilih Permohonan Pengujian</label>
+                            <div class="select2-input">
+                                <select id="basic" name="formulir_id" class="form-control">
+                                    <option value="">--pilih permohonan pengujian--</option>
+                                    @foreach ($formulirs as $formulir)
+                                        <option value="{{ $formulir->id }}">
+                                            {{ $formulir->code_form }} - {{ $formulir->bahan->nama }}
+                                            ({{ $formulir->nama_pemohon }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label>Diterima Tanggal</label>
                             <input type="date"
                                 class="form-control form-control @error('diterima_tanggal') is-invalid @enderror"
                                 name="diterima_tanggal">
                         </div>
-
-                        <input type="text" name="formulir_id" value="{{ $permohonan->id }}" hidden>
 
                         <div class="form-group">
                             <label>Pekerjaan Mix Design / Job Mix</label>
@@ -40,20 +52,6 @@
                             <label>SPU No</label>
                             <input type="text" class="form-control form-control @error('no_spu') is-invalid @enderror"
                                 name="no_spu">
-                        </div>
-                        <div class="form-group">
-                            <label>Untuk Proyek/Paker Pekerjaan</label>
-                            <br>
-                            <a href="{{ asset('storage/' . $permohonan->dokumen) }}" target="_blank"
-                                class="text-decoration-none">
-                                <i class="far fa-eye"></i>
-                                Lihat Lampiran
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <label>Pelaksana / Kontraktor</label>
-                            <input type="text" class="form-control form-control"
-                                value="{{ $permohonan->kontraktor_nama }}" disabled>
                         </div>
                         <div class="form-group">
                             <label>Tahun Anggaran</label>
@@ -88,6 +86,10 @@
     <script>
         $('#datepicker').datetimepicker({
             format: 'YYYY',
+        });
+
+        $('#basic').select2({
+            theme: "bootstrap"
         });
     </script>
 @endpush

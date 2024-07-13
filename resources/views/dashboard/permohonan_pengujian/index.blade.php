@@ -37,7 +37,8 @@
                                     <tr class="text-center">
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $permohonan->code_form }}</td>
-                                        <td>{{ $permohonan->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($permohonan->created_at)->translatedFormat('d F Y') }}
+                                        </td>
                                         <td>{{ $permohonan->nama_pemohon }}</td>
                                         <td>{{ $permohonan->bahan->nama }}</td>
                                         <td>
@@ -49,17 +50,17 @@
                                         <td class="text-uppercase">
                                             @if ($permohonan->status == 'pengajuan')
                                                 <span class="badge badge-info" style="font-size: 16px;">
-                                                    Perlu Diverifikasi
+                                                    Permohonan
                                                 </span>
                                             @endif
                                             @if ($permohonan->status == 'ceklist')
                                                 <span class="badge badge-primary" style="font-size: 16px;">
-                                                    Belum Disetujui
+                                                    Ceklist
                                                 </span>
                                             @endif
                                             @if ($permohonan->status == 'pengujian')
                                                 <span class="badge badge-success" style="font-size: 16px;">
-                                                    Setuju
+                                                    Disetujui
                                                 </span>
                                             @endif
                                         </td>
@@ -82,29 +83,6 @@
                                                         <i class="fas fa-print"></i>
                                                         Cetak Tanda Terima Order
                                                     </a>
-                                                    @if ($permohonan->status == 'pengujian')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('generate.perintah.uji', $permohonan->code_form) }}"
-                                                            target="_blank">
-                                                            <i class="fas fa-print"></i>
-                                                            Cetak Surat Perintah Uji
-                                                        </a>
-                                                    @endif
-                                                    @if ($permohonan->status == 'ceklist')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('generate.cheeklist.material.pengujian', $permohonan->code_form) }}"
-                                                            target="_blank">
-                                                            <i class="fas fa-print"></i>
-                                                            Cetak Cheeklist Material Pengujian
-                                                        </a>
-                                                    @endif
-                                                    @if ($permohonan->checklist->isEmpty())
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('checklist.create', $permohonan->code_form) }}">
-                                                            <i class="fas fa-plus"></i>
-                                                            Buat Check List
-                                                        </a>
-                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>

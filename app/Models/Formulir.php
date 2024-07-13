@@ -21,7 +21,7 @@ class Formulir extends Model
 
     public function checklist(): HasMany
     {
-        return $this->hasMany(Checklist::class, 'formulir_id');
+        return $this->hasMany(Checklist::class, 'formulir_id', 'id');
     }
 
     // Mengaktifkan timestamps (created_at dan updated_at)

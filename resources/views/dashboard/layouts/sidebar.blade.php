@@ -32,13 +32,13 @@
                     <li class="nav-item {{ request()->segment(2) == 'permohonan-pengujian' ? 'active' : '' }}">
                         <a href="{{ route('permohonan.pengujian.index') }}">
                             <i class="far fa-envelope-open"></i>
-                            <p>Permohonan Pengujian</p>
+                            <p>Permohonan</p>
                         </a>
                     </li>
                     <li class="nav-item {{ request()->segment(2) == 'checklist' ? 'active' : '' }}">
                         <a href="{{ route('checklist.index') }}">
                             <i class="fas fa-clipboard-check"></i>
-                            <p>Check List Material</p>
+                            <p>Ceklist Material</p>
                         </a>
                     </li>
                     <li class="nav-item {{ request()->segment(2) == 'surat-pengujian' ? 'active' : '' }}">

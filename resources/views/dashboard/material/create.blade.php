@@ -54,16 +54,13 @@
 
         {{-- Tabel List Materials --}}
         <div class="col-lg-12">
-            @if ($formulir->status == 'pengajuan')
-                <div class="my-4">
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
-                        data-target="#modal_create">
-                        <i class="fas fa-plus"></i>
-                        Material
-                    </button>
-                </div>
-                @include('dashboard.material.modal_create')
-            @endif
+            <div class="my-4">
+                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_create">
+                    <i class="fas fa-plus"></i>
+                    Material
+                </button>
+            </div>
+            @include('dashboard.material.modal_create')
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -77,9 +74,7 @@
                                 <th>Satuan</th>
                                 <th>Kelengkapan</th>
                                 <th>Keterangan</th>
-                                @if ($formulir->status == 'pengajuan')
-                                    <th>Aksi</th>
-                                @endif
+                                <th>Aksi</th>
                             </thead>
                             <tbody>
                                 @php
@@ -94,19 +89,17 @@
                                         <td>{{ $item->satuan }}</td>
                                         <td>{{ $item->kelengkapan }}</td>
                                         <td>{{ $item->keterangan }}</td>
-                                        @if ($formulir->status == 'pengajuan')
-                                            <td>
-                                                <form action="{{ route('delete.material', $item->id) }}" method="POST"
-                                                    class="form-inline justify-content-center">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger"
-                                                        onclick="return confirm('Anda yakin ingin menghapus material ini ?')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        @endif
+                                        <td>
+                                            <form action="{{ route('delete.material', $item->id) }}" method="POST"
+                                                class="form-inline justify-content-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-outline-danger"
+                                                    onclick="return confirm('Anda yakin ingin menghapus material ini ?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
 
                                     </tr>
                                 @endforeach
