@@ -5,9 +5,11 @@ use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneratePdfController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KasiPengujianController;
 use App\Http\Controllers\KotakMasukController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SuratPengujian;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TemplateSuratController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +44,10 @@ Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, '
 
 // Cetak Output Permohonan Pengujian
 Route::get('/cetak/permohonan-pengujian/{code_form}', [GeneratePdfController::class, 'generatePermohonanPengujian'])->name('generate.permohonan.pengujian');
+// Cetak Output Tanda Terima Order
+Route::get('/ceatk/tanda-terima-order/{code_form}', [GeneratePdfController::class, 'generateTandaTerimaOrder'])->name('generate.tanda.terima.order');
+// Cetak Output Cheeklist Material Pengujian
+Route::get('cetak/cheeklist-material-pengujian/{code_form}', [GeneratePdfController::class, 'generateCheeklistMaterialPengujian'])->name('generate.cheeklist.material.pengujian');
 // Cetak Output Surat Perintah Uji
 Route::get('/cetak/surat-perintah-uji/{code_form}', [GeneratePdfController::class, 'generatePerintahUji'])->name('generate.perintah.uji');
 
@@ -76,6 +82,12 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
     // Delete Material
     Route::delete('/checklist/tambah-material/delete/{id}', [ChecklistController::class, 'delete_material'])->name('delete.material');
 
+    // Surat Pengujian
+    Route::get('/surat-pengujian', [SuratPengujian::class, 'index'])->name('surat.pengujian.index');
+    Route::get('/surat-pengujian/create', [SuratPengujian::class, 'create'])->name('surat.pengujian.create');
+    Route::post('/surat-pengujian/store', [SuratPengujian::class, 'store'])->name('surat.pengujian.store');
+    Route::patch('/surat-pengujian/delete/{code_form}', [SuratPengujian::class, 'delete'])->name('surat.pengujian.delete');
+
     // Kotak Masuk
     Route::get('/kotak-masuk/verifikasi', [KotakMasukController::class, 'index'])->name('kotak.masuk.index');
     Route::get('/kotak-masuk/verifikasi/show/{code_form}', [KotakMasukController::class, 'show'])->name('kotak.masuk.show');
@@ -89,4 +101,7 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
     // Profil Edit
     Route::get('profil', [ProfilController::class, 'edit'])->name('profil.edit');
     Route::patch('profil/update/{id}', [ProfilController::class, 'update'])->name('profil.update');
+
+    // CRUD Kasi Pengujian
+    Route::resource('/kasi-pengujian', KasiPengujianController::class);
 });

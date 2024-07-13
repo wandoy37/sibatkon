@@ -18,6 +18,7 @@
                             width="100%">
                             <thead>
                                 <th>No</th>
+                                <th>Ticket</th>
                                 <th>Diterima Tanggal</th>
                                 <th>Pelaksana / Kontraktor</th>
                                 <th>Tahun Anggaran</th>
@@ -30,11 +31,16 @@
                                 @foreach ($checklists as $checklist)
                                     <tr>
                                         <td>{{ $no++ }}</td>
+                                        <td>{{ $checklist->formulir->code_form }}</td>
                                         <td>{{ $checklist->diterima_tanggal }}</td>
                                         <td>{{ $checklist->formulir->kontraktor_nama }}</td>
                                         <td>{{ $checklist->tahun_anggaran }}</td>
                                         <td>
-                                            <a class="btn btn-primary btn-round"
+                                            <a class="btn btn-info"
+                                                href="{{ route('generate.cheeklist.material.pengujian', $checklist->formulir->code_form) }}">
+                                                <i class="fas fa-print"></i>
+                                            </a>
+                                            <a class="btn btn-primary"
                                                 href="{{ route('material.create', $checklist->formulir->code_form) }}">
                                                 <i class="fas fa-eye"></i>
                                             </a>

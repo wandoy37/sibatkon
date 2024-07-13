@@ -41,6 +41,12 @@
                             <p>Check List Material</p>
                         </a>
                     </li>
+                    <li class="nav-item {{ request()->segment(2) == 'surat-pengujian' ? 'active' : '' }}">
+                        <a href="{{ route('surat.pengujian.index') }}">
+                            <i class="far fa-newspaper"></i>
+                            <p>Surat Pengujian</p>
+                        </a>
+                    </li>
                     <li class="nav-item {{ request()->segment(2) == 'survey' ? 'active' : '' }}">
                         <a href="{{ route('survey.index') }}">
                             <i class="icon-check"></i>
@@ -51,6 +57,12 @@
                         <a href="{{ route('profil.edit') }}">
                             <i class="icon-information"></i>
                             <p>Update Profil</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ request()->segment(2) == 'kasi-pengujian' ? 'active' : '' }}">
+                        <a href="{{ route('kasi-pengujian.index') }}">
+                            <i class="fas fa-user"></i>
+                            <p>Kasi Pengujian</p>
                         </a>
                     </li>
                 @endif

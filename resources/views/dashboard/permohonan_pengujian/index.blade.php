@@ -71,28 +71,38 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                                     <a class="dropdown-item"
-                                                        href="{{ route('generate.permohonan.pengujian', $permohonan->code_form) }}">
+                                                        href="{{ route('generate.permohonan.pengujian', $permohonan->code_form) }}"
+                                                        target="_blank">
                                                         <i class="fas fa-print"></i>
                                                         Cetak Permohonan Pengujian
                                                     </a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('generate.tanda.terima.order', $permohonan->code_form) }}"
+                                                        target="_blank">
+                                                        <i class="fas fa-print"></i>
+                                                        Cetak Tanda Terima Order
+                                                    </a>
+                                                    @if ($permohonan->status == 'pengujian')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('generate.perintah.uji', $permohonan->code_form) }}"
+                                                            target="_blank">
+                                                            <i class="fas fa-print"></i>
+                                                            Cetak Surat Perintah Uji
+                                                        </a>
+                                                    @endif
+                                                    @if ($permohonan->status == 'ceklist')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('generate.cheeklist.material.pengujian', $permohonan->code_form) }}"
+                                                            target="_blank">
+                                                            <i class="fas fa-print"></i>
+                                                            Cetak Cheeklist Material Pengujian
+                                                        </a>
+                                                    @endif
                                                     @if ($permohonan->checklist->isEmpty())
                                                         <a class="dropdown-item"
                                                             href="{{ route('checklist.create', $permohonan->code_form) }}">
                                                             <i class="fas fa-plus"></i>
                                                             Buat Check List
-                                                        </a>
-                                                    @else
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('material.create', $permohonan->code_form) }}">
-                                                            <i class="fas fa-eye"></i>
-                                                            Lihat Checklist
-                                                        </a>
-                                                    @endif
-                                                    @if ($permohonan->status == 'pengujian')
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('generate.perintah.uji', $permohonan->code_form) }}">
-                                                            <i class="fas fa-eye"></i>
-                                                            Surat Perintah Uji
                                                         </a>
                                                     @endif
                                                 </ul>

@@ -3,6 +3,7 @@
 namespace App\Pdf;
 
 use setasign\Fpdi\Fpdi;
+use Carbon\Carbon;
 
 class PdfService extends Fpdi
 {
@@ -37,9 +38,10 @@ class PdfService extends Fpdi
         $pdf->SetTextColor(0, 0, 0);
 
         // Tanggal/Date
+        Carbon::setLocale('id');
         $pdf->SetXY(0, 14);
         $pdf->SetX(75);
-        $pdf->Cell(0, 103,  date('d-m-Y', strtotime($formulir->created_at)), 0, 'L');
+        $pdf->Cell(0, 103,  Carbon::parse($formulir->created_at)->translatedFormat(' d F Y'), 0, 'L');
         $pdf->SetX(12.6);
 
         // Nama Bahan/Barang
@@ -170,7 +172,7 @@ class PdfService extends Fpdi
         // Kasi Pengujian Jabatan
         $pdf->SetXY(0, 28);
         $pdf->SetX(98);
-        $pdf->Cell(0, 149, 'Kasi Pengujian', 0, 'L');
+        $pdf->Cell(0, 149, $kasi_pengujian->jabatan, 0, 'L');
         $pdf->SetX(12.6);
 
         // Untuk Melakukan Uji
@@ -193,6 +195,174 @@ class PdfService extends Fpdi
         $pdf->SetTitle('Permohonan Pengujian - ' . $formulir->code_form);
         // Output PDF
         $pdf->Output('Permohonan Pengujian - ' . $formulir->code_form, 'I');
+
+        exit;
+    }
+
+    public function createTendaTerimaOrder($formulir)
+    {
+        $templatePath = public_path('template/tandaterima_order.pdf');
+
+        $pdf = new FPDI();
+        $pdf->AddPage('P', 'A4');
+
+        // Halaman pertama =========================================================================================================
+        $pdf->setSourceFile($templatePath);
+        $templateId = $pdf->importPage(1); // Ambil halaman pertama dari template PDF
+        $pdf->useTemplate($templateId);
+
+        // Mengatur margin dalam satuan milimeter (mm)
+        $pdf->SetMargins(20, 20, 20, 30);
+        $pdf->SetAutoPageBreak(true, 20);
+
+        // Set font dan ukuran
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->SetFont("helvetica", "", 9);
+        $pdf->SetTextColor(0, 0, 0);
+
+        // Telah Terima Order Dari
+        $pdf->SetXY(100, 65.5);
+        $pdf->Cell(0, 0, $formulir->kontraktor_nama, 0, 1, 'L');
+
+        // Nama Pelanggan
+        $pdf->SetXY(100, 71.5);
+        $pdf->Cell(0, 0, $formulir->nama_pemohon, 0, 1, 'L');
+
+        // Alamat
+        $pdf->SetXY(100, 77.5);
+        $pdf->Cell(0, 0, $formulir->kontraktor_alamat, 0, 1, 'L');
+
+        // Jenis Contoh Uji
+        $pdf->SetXY(100, 90);
+        $pdf->Cell(0, 0, $formulir->bahan->nama, 0, 1, 'L');
+
+        // Jumlah Contoh Uji
+        $pdf->SetXY(100, 96.5);
+        $pdf->Cell(0, 0, $formulir->quantity . ' Sampel', 0, 1, 'L');
+
+        // Mengatur lokalitas Carbon ke bahasa Indonesia
+        Carbon::setLocale('id');
+        // Menambahkan cell dengan tanggal pada posisi Y = 300
+        // Set font ke ukuran 9 untuk bagian tanggal
+        $pdf->SetFont("helvetica", "", 9);
+        $pdf->SetXY(147, 234.5);
+        $pdf->Cell(0, 0, Carbon::parse($formulir->created_at)->translatedFormat('d F Y'), 0, 1, 'L');
+
+        // Set judul file PDF
+        $pdf->SetTitle('Tanda Terima Order - ' . $formulir->code_form);
+        // Output PDF
+        $pdf->Output('Tanda Terima Order - ' . $formulir->code_form, 'I');
+
+        exit;
+    }
+
+    public function createCheeklistMaterialPengujian($formulir, $checklist)
+    {
+        $templatePath = public_path('template/cheeklist_material_pengujian.pdf');
+
+        $pdf = new FPDI();
+        $pdf->AddPage('P', 'A4');
+
+        // Halaman pertama =========================================================================================================
+        $pdf->setSourceFile($templatePath);
+        $templateId = $pdf->importPage(1); // Ambil halaman pertama dari template PDF
+        $pdf->useTemplate($templateId);
+
+        // Mengatur margin dalam satuan milimeter (mm)
+        $pdf->SetMargins(20, 20, 20, 30);
+        $pdf->SetAutoPageBreak(true, 20);
+
+        // Set font dan ukuran
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->SetFont("helvetica", "", 12);
+        $pdf->SetTextColor(0, 0, 0);
+
+        // Cheeklist Diterima Tanggal
+        Carbon::setLocale('id');
+        $pdf->SetXY(103, 31.5);
+        $pdf->Cell(0, 0, Carbon::parse($checklist->diterima_tanggal)->translatedFormat('d F Y'), 0, 1, 'L');
+
+        // PEKERJAAN MIX DESIGN / JOB MIX
+        $pdf->SetXY(103, 38);
+        $pdf->Cell(0, 0, $checklist->job_mix, 0, 1, 'L');
+
+        // SPU No
+        $pdf->SetXY(103, 44);
+        $pdf->Cell(0, 0, $checklist->no_spu, 0, 1, 'L');
+
+        // PELAKSANA / KONTRAKTOR
+        $pdf->SetXY(103, 56.4);
+        $pdf->Cell(0, 0, $formulir->kontraktor_nama, 0, 1, 'L');
+
+        // TAHUN ANGGARAN
+        $pdf->SetXY(103, 62.5);
+        $pdf->Cell(0, 0, $checklist->tahun_anggaran, 0, 1, 'L');
+
+
+        // LIST MATERIAL
+
+        // Looping untuk setiap item dalam materials
+        $startX = 23; // Posisi X awal
+        $startY = 82; // Posisi Y awal
+        $offsetY = 14.5; // Jarak vertikal antar cell
+        $offsetXVolume = 88; // Jarak horizontal untuk volume
+        $offsetXSatuan = 93; // Jarak horizontal untuk Satuan
+        $offsetXCheckAda = 115; // Jarak horizontal untuk ceklis
+        $offsetXCheckTidak = 129; // Jarak horizontal untuk ceklis
+        $offsetXKeterangan = 142; // Jarak horizontal untuk ceklis
+
+        foreach ($checklist->materials as $index => $item) {
+            // Set posisi untuk setiap item
+            $pdf->SetXY($startX, $startY + ($index * $offsetY));
+            $pdf->Cell(0, 0, $item->material, 0, 1, 'L');
+
+            $pdf->SetXY($startX, $startY + ($index * $offsetY));
+            $pdf->Cell(0, 11, 'Ex. ' . $item->ex, 0, 1, 'L');
+
+            $pdf->SetXY($startX + $offsetXVolume, $startY + ($index * $offsetY));
+            $pdf->Cell(0, 8, $item->volume, 0, 10, 'L');
+
+            $pdf->SetXY($startX + $offsetXSatuan, $startY + ($index * $offsetY));
+            $pdf->Cell(0, 8, $item->satuan, 0, 10, 'L');
+
+            // Tambahkan simbol ceklis
+            if ($item->kelengkapan == 'ada') {
+                $pdf->SetFont('ZapfDingbats', '', 25); // Gunakan font ZapfDingbats untuk simbol ceklis
+                $pdf->SetXY($startX + $offsetXCheckAda, $startY + ($index * $offsetY));
+                $pdf->Cell(0, 8, chr(51), 0, 1, 'L'); // chr(51) adalah simbol ceklis di ZapfDingbats
+                $pdf->SetFont('helvetica', '', 12); // Kembali ke font default
+            }
+
+            // Tambahkan simbol ceklis
+            if ($item->kelengkapan == 'tidak ada') {
+                $pdf->SetFont('ZapfDingbats', '', 25); // Gunakan font ZapfDingbats untuk simbol ceklis
+                $pdf->SetXY($startX + $offsetXCheckTidak, $startY + ($index * $offsetY));
+                $pdf->Cell(0, 8, chr(51), 0, 1, 'L'); // chr(51) adalah simbol ceklis di ZapfDingbats
+                $pdf->SetFont('helvetica', '', 12); // Kembali ke font default
+            }
+
+            // Keterangan
+            $pdf->SetXY($startX + $offsetXKeterangan, $startY + ($index * $offsetY));
+            $pdf->Cell(0, 8, $item->keterangan, 0, 10, 'L');
+        }
+
+        // Bagian Bawah
+        // Kontraktor
+        $pdf->SetXY(107, 257.5);
+        $pdf->Cell(0, 0, $formulir->kontraktor_nama, 0, 1, 'L');
+
+        // NAMA
+        $pdf->SetXY(107, 263.5);
+        $pdf->Cell(0, 0, $formulir->nama_pemohon, 0, 1, 'L');
+
+        // NP. TELP/HP
+        $pdf->SetXY(107, 274);
+        $pdf->Cell(0, 0, $formulir->no_hp_pemohon, 0, 1, 'L');
+
+        // Set judul file PDF
+        $pdf->SetTitle('Tanda Terima Order - ' . $formulir->code_form);
+        // Output PDF
+        $pdf->Output('Tanda Terima Order - ' . $formulir->code_form, 'I');
 
         exit;
     }
