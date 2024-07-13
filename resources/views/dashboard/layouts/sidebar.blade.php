@@ -63,7 +63,7 @@
                 </li>
                 <li class="nav-item {{ request()->segment(2) == 'kasi-pengujian' ? 'active' : '' }}">
                     <a href="{{ route('kasi-pengujian.index') }}">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-users"></i>
                         <p>Kasi Pengujian</p>
                     </a>
                 </li>
@@ -77,6 +77,12 @@
                     <a href="{{ route('profil.edit') }}">
                         <i class="icon-information"></i>
                         <p>Update Profil</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'akun' ? 'active' : '' }}">
+                    <a href="{{ route('akun.edit', Auth::user()->id) }}">
+                        <i class="fas fa-user-cog"></i>
+                        <p>Akun</p>
                     </a>
                 </li>
             </ul>

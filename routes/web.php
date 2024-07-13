@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SuratPengujian;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TemplateSuratController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -105,4 +106,8 @@ Route::middleware(['auth'])->prefix('auth')->group(function () {
 
     // CRUD Kasi Pengujian
     Route::resource('/kasi-pengujian', KasiPengujianController::class);
+
+    // Edit Akun
+    Route::get('/akun/edit/{id}', [UserController::class, 'edit'])->name('akun.edit');
+    Route::patch('/akun/update/{id}', [UserController::class, 'update'])->name('akun.update');
 });
