@@ -22,64 +22,63 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                @if (Auth::user()->role !== 'penguji')
-                    <li class="nav-item {{ request()->segment(2) == 'bahan' ? 'active' : '' }}">
-                        <a href="{{ route('bahan.index') }}">
-                            <i class="fas fa-box"></i>
-                            <p>Bahan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'permohonan-pengujian' ? 'active' : '' }}">
-                        <a href="{{ route('permohonan.pengujian.index') }}">
-                            <i class="far fa-envelope-open"></i>
-                            <p>Permohonan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'checklist' ? 'active' : '' }}">
-                        <a href="{{ route('checklist.index') }}">
-                            <i class="fas fa-clipboard-check"></i>
-                            <p>Ceklist Material</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'surat-pengujian' ? 'active' : '' }}">
-                        <a href="{{ route('surat.pengujian.index') }}">
-                            <i class="far fa-newspaper"></i>
-                            <p>Surat Pengujian</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'survey' ? 'active' : '' }}">
-                        <a href="{{ route('survey.index') }}">
-                            <i class="icon-check"></i>
-                            <p>Survey</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'profil' ? 'active' : '' }}">
-                        <a href="{{ route('profil.edit') }}">
-                            <i class="icon-information"></i>
-                            <p>Update Profil</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'kasi-pengujian' ? 'active' : '' }}">
-                        <a href="{{ route('kasi-pengujian.index') }}">
-                            <i class="fas fa-user"></i>
-                            <p>Kasi Pengujian</p>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->role == 'penguji')
-                    <li class="nav-section">
-                        <span class="sidebar-mini-icon">
-                            <i class="fa fa-ellipsis-h"></i>
-                        </span>
-                        <h4 class="text-section">KOTAK MASUK</h4>
-                    </li>
-                    <li class="nav-item {{ request()->segment(2) == 'kotak-masuk' ? 'active' : '' }}">
-                        <a href="{{ route('kotak.masuk.index') }}">
-                            <i class="icon-check"></i>
-                            <p>Verifikasi Permohonan</p>
-                        </a>
-                    </li>
-                @endif
+
+                <li class="nav-item {{ request()->segment(2) == 'permohonan-pengujian' ? 'active' : '' }}">
+                    <a href="{{ route('permohonan.pengujian.index') }}">
+                        <i class="far fa-envelope-open"></i>
+                        <p>Permohonan</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'checklist' ? 'active' : '' }}">
+                    <a href="{{ route('checklist.index') }}">
+                        <i class="fas fa-clipboard-check"></i>
+                        <p>Ceklist Material</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'surat-pengujian' ? 'active' : '' }}">
+                    <a href="{{ route('surat.pengujian.index') }}">
+                        <i class="far fa-newspaper"></i>
+                        <p>Surat Pengujian</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'survey' ? 'active' : '' }}">
+                    <a href="{{ route('survey.index') }}">
+                        <i class="icon-check"></i>
+                        <p>Survey</p>
+                    </a>
+                </li>
+
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">MASTER</h4>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'bahan' ? 'active' : '' }}">
+                    <a href="{{ route('bahan.index') }}">
+                        <i class="fas fa-box"></i>
+                        <p>Bahan</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'kasi-pengujian' ? 'active' : '' }}">
+                    <a href="{{ route('kasi-pengujian.index') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Kasi Pengujian</p>
+                    </a>
+                </li>
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">PENGATURAN</h4>
+                </li>
+                <li class="nav-item {{ request()->segment(2) == 'profil' ? 'active' : '' }}">
+                    <a href="{{ route('profil.edit') }}">
+                        <i class="icon-information"></i>
+                        <p>Update Profil</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
