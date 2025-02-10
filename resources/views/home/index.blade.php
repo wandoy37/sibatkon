@@ -239,7 +239,7 @@
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                                 <input class="form-control" name="dokumen" type="file"
-                                                    accept="application/pdf">
+                                                    accept="application/pdf/image">
                                                 <i class="text-decoration-underline">Max Size : 2mb</i>
                                             </div>
                                         </div>

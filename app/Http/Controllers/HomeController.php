@@ -52,7 +52,7 @@ class HomeController extends Controller
             'kontraktor_alamat' => 'required',
 
             // Dokumen Permohonan
-            'dokumen' => 'required|mimes:pdf|max:2048',
+            'dokumen' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
             // Sisa Contoh,
             'sisa_contoh' => 'required',
         ]);
