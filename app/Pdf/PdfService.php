@@ -221,23 +221,23 @@ class PdfService extends Fpdi
         $pdf->SetTextColor(0, 0, 0);
 
         // Telah Terima Order Dari
-        $pdf->SetXY(100, 65.5);
+        $pdf->SetXY(113.5, 62);
         $pdf->Cell(0, 0, $formulir->kontraktor_nama, 0, 1, 'L');
 
         // Nama Pelanggan
-        $pdf->SetXY(100, 71.5);
+        $pdf->SetXY(113.5, 68);
         $pdf->Cell(0, 0, $formulir->nama_pemohon, 0, 1, 'L');
 
         // Alamat
-        $pdf->SetXY(100, 77.5);
+        $pdf->SetXY(113.5, 74);
         $pdf->Cell(0, 0, $formulir->kontraktor_alamat, 0, 1, 'L');
 
         // Jenis Contoh Uji
-        $pdf->SetXY(100, 90);
+        $pdf->SetXY(113.5, 86.5);
         $pdf->Cell(0, 0, $formulir->bahan->nama, 0, 1, 'L');
 
         // Jumlah Contoh Uji
-        $pdf->SetXY(100, 96.5);
+        $pdf->SetXY(113.5, 93);
         $pdf->Cell(0, 0, $formulir->quantity . ' Sampel', 0, 1, 'L');
 
         // Mengatur lokalitas Carbon ke bahasa Indonesia
@@ -245,7 +245,7 @@ class PdfService extends Fpdi
         // Menambahkan cell dengan tanggal pada posisi Y = 300
         // Set font ke ukuran 9 untuk bagian tanggal
         $pdf->SetFont("helvetica", "", 9);
-        $pdf->SetXY(147, 234.5);
+        $pdf->SetXY(155, 229.5);
         $pdf->Cell(0, 0, Carbon::parse($formulir->created_at)->translatedFormat('d F Y'), 0, 1, 'L');
 
         // Set judul file PDF
