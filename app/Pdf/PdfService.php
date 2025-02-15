@@ -199,9 +199,68 @@ class PdfService extends Fpdi
         exit;
     }
 
-    public function createTendaTerimaOrder($formulir)
+    // Cetak Output Tanda Terima Order tipe 1
+    public function createTandaTerimaOrder_tipe_1($formulir)
     {
-        $templatePath = public_path('template/tandaterima_order.pdf');
+        $templatePath = public_path('template/tandaterima_order_tipe_1.pdf');
+
+        $pdf = new FPDI();
+        $pdf->AddPage('P', 'A4');
+
+        // Halaman pertama =========================================================================================================
+        $pdf->setSourceFile($templatePath);
+        $templateId = $pdf->importPage(1); // Ambil halaman pertama dari template PDF
+        $pdf->useTemplate($templateId);
+
+        // Mengatur margin dalam satuan milimeter (mm)
+        $pdf->SetMargins(20, 20, 20, 30);
+        $pdf->SetAutoPageBreak(true, 20);
+
+        // Set font dan ukuran
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->SetFont("helvetica", "", 9);
+        $pdf->SetTextColor(0, 0, 0);
+
+        // Telah Terima Order Dari
+        $pdf->SetXY(100, 65.5);
+        $pdf->Cell(0, 0, $formulir->kontraktor_nama, 0, 1, 'L');
+
+        // Nama Pelanggan
+        $pdf->SetXY(100, 71.5);
+        $pdf->Cell(0, 0, $formulir->nama_pemohon, 0, 1, 'L');
+
+        // Alamat
+        $pdf->SetXY(100, 77.5);
+        $pdf->Cell(0, 0, $formulir->kontraktor_alamat, 0, 1, 'L');
+
+        // Jenis Contoh Uji
+        $pdf->SetXY(100, 90);
+        $pdf->Cell(0, 0, $formulir->bahan->nama, 0, 1, 'L');
+
+        // Jumlah Contoh Uji
+        $pdf->SetXY(100, 96.5);
+        $pdf->Cell(0, 0, $formulir->quantity . ' Sampel', 0, 1, 'L');
+
+        // Mengatur lokalitas Carbon ke bahasa Indonesia
+        Carbon::setLocale('id');
+        // Menambahkan cell dengan tanggal pada posisi Y = 300
+        // Set font ke ukuran 9 untuk bagian tanggal
+        $pdf->SetFont("helvetica", "", 9);
+        $pdf->SetXY(147, 234.5);
+        $pdf->Cell(0, 0, Carbon::parse($formulir->created_at)->translatedFormat('d F Y'), 0, 1, 'L');
+
+        // Set judul file PDF
+        $pdf->SetTitle('Tanda Terima Order - ' . $formulir->code_form);
+        // Output PDF
+        $pdf->Output('Tanda Terima Order - ' . $formulir->code_form, 'I');
+
+        exit;
+    }
+
+    // Cetak Output Tanda Terima Order tipe 2
+    public function createTandaTerimaOrder_tipe_2($formulir)
+    {
+        $templatePath = public_path('template/tandaterima_order_tipe_2.pdf');
 
         $pdf = new FPDI();
         $pdf->AddPage('P', 'A4');
@@ -239,6 +298,42 @@ class PdfService extends Fpdi
         // Jumlah Contoh Uji
         $pdf->SetXY(113.5, 93);
         $pdf->Cell(0, 0, $formulir->quantity . ' Sampel', 0, 1, 'L');
+
+        // =======Tambahan Manual======
+        if ($formulir->bahan->nama == 'Balok') {
+            // Parameter Uji
+            $pdf->SetXY(41.5, 116);
+            $pdf->Cell(0, 0, 'Kuat lentur beton dengan dua titik pembebanan', 0, 1, 'L');
+
+            // Metode  Pengujianji
+            $pdf->SetXY(112, 116);
+            $pdf->Cell(0, 0, 'SNI 4431:2011', 0, 1, 'L');
+        } elseif ($formulir->bahan->nama == 'Kubus') {
+            // Parameter Uji
+            $pdf->SetXY(41.5, 116);
+            $pdf->Cell(0, 0, 'Kuat tekan beton (benda uji kubus)', 0, 1, 'L');
+
+            // Metode  Pengujianji
+            $pdf->SetXY(112, 116);
+            $pdf->Cell(0, 0, 'SNI 03-1974-1990', 0, 1, 'L');
+        } elseif ($formulir->bahan->nama == 'Slinder') {
+            // Parameter Uji
+            $pdf->SetXY(41.5, 116);
+            $pdf->Cell(0, 0, 'Kuat tekan beton dengan benda uji silinder', 0, 1, 'L');
+
+            // Metode  Pengujianji
+            $pdf->SetXY(112, 116);
+            $pdf->Cell(0, 0, 'SNI 1974:2011', 0, 1, 'L');
+        } elseif ($formulir->bahan->nama == 'Balok & Silinder') {
+            // Parameter Uji
+            $pdf->SetXY(41.5, 116);
+            $pdf->Cell(0, 0, '', 0, 1, 'L');
+
+            // Metode  Pengujianji
+            $pdf->SetXY(112, 116);
+            $pdf->Cell(0, 0, '', 0, 1, 'L');
+        }
+        // =======End Tambahan Manual======
 
         // Mengatur lokalitas Carbon ke bahasa Indonesia
         Carbon::setLocale('id');

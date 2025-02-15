@@ -78,10 +78,16 @@
                                                         Cetak Permohonan Pengujian
                                                     </a>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('generate.tanda.terima.order', $permohonan->code_form) }}"
+                                                        href="{{ route('generate.tanda.terima.order.satu', $permohonan->code_form) }}"
                                                         target="_blank">
                                                         <i class="fas fa-print"></i>
-                                                        Cetak Tanda Terima Order
+                                                        Cetak Tanda Terima Order Tipe 1
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('generate.tanda.terima.order.dua', $permohonan->code_form) }}"
+                                                        target="_blank">
+                                                        <i class="fas fa-print"></i>
+                                                        Cetak Tanda Terima Order Tipe 2
                                                     </a>
                                                 </ul>
                                             </div>

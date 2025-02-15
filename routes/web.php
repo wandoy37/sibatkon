@@ -45,8 +45,12 @@ Route::get('/ticket/permohonan-pengujian/{code_form}', [HomeController::class, '
 
 // Cetak Output Permohonan Pengujian
 Route::get('/cetak/permohonan-pengujian/{code_form}', [GeneratePdfController::class, 'generatePermohonanPengujian'])->name('generate.permohonan.pengujian');
-// Cetak Output Tanda Terima Order
-Route::get('/ceatk/tanda-terima-order/{code_form}', [GeneratePdfController::class, 'generateTandaTerimaOrder'])->name('generate.tanda.terima.order');
+
+// Cetak Output Tanda Terima Order tipe 1
+Route::get('/ceatk/tanda-terima-order/{code_form}/tipe_satu', [GeneratePdfController::class, 'generateTandaTerimaOrder_tipe_1'])->name('generate.tanda.terima.order.satu');
+// Cetak Output Tanda Terima Order tipe 2
+Route::get('/ceatk/tanda-terima-order/{code_form}/tipe_dua', [GeneratePdfController::class, 'generateTandaTerimaOrder_tipe_2'])->name('generate.tanda.terima.order.dua');
+
 // Cetak Output Cheeklist Material Pengujian
 Route::get('cetak/cheeklist-material-pengujian/{code_form}', [GeneratePdfController::class, 'generateCheeklistMaterialPengujian'])->name('generate.cheeklist.material.pengujian');
 // Cetak Output Surat Perintah Uji

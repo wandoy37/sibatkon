@@ -31,10 +31,16 @@ class GeneratePdfController extends Controller
         $this->PdfService->createPerintahUji($formulir, $kasi_pengujian);
     }
 
-    public function generateTandaTerimaOrder($code_form)
+    public function generateTandaTerimaOrder_tipe_1($code_form)
     {
         $formulir = Formulir::where('code_form', $code_form)->first();
-        $this->PdfService->createTendaTerimaOrder($formulir);
+        $this->PdfService->createTandaTerimaOrder_tipe_1($formulir);
+    }
+
+    public function generateTandaTerimaOrder_tipe_2($code_form)
+    {
+        $formulir = Formulir::where('code_form', $code_form)->first();
+        $this->PdfService->createTandaTerimaOrder_tipe_2($formulir);
     }
 
     public function generateCheeklistMaterialPengujian($code_form)
